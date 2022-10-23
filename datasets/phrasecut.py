@@ -86,7 +86,7 @@ class PhraseCut(object):
         else:
             self.aug_color = None
 
-        get_from_repository('PhraseCut', ['PhraseCut.tar'], integrity_check=lambda local_dir: all([
+        get_from_repository('PhraseCut', ['PhraseCut.zip'], integrity_check=lambda local_dir: all([
             isdir(join(local_dir, 'VGPhraseCut_v0')),
             isdir(join(local_dir, 'VGPhraseCut_v0', 'images')),
             isfile(join(local_dir, 'VGPhraseCut_v0', 'refer_train.json')),
