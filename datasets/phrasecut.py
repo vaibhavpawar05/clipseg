@@ -318,7 +318,7 @@ class PhraseCut(object):
                 else:
                     vis_s = [vis_s, False]
         else:
-            assert self.mask == 'text'
+            #assert self.mask == 'text'
             vis_s = [phrase]
         
         seg = seg.unsqueeze(0).float()
