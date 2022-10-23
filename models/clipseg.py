@@ -322,7 +322,8 @@ class CLIPDensePredT(CLIPDenseBase):
 
         self.version = version
         
-        self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14)}[version]
+        #self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14)}[version]
+        self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14), 'ViT-L/14': (16, 16)}[version]
 
         if fix_shift:
             # self.shift_vector = nn.Parameter(torch.load(join(dirname(basename(__file__)), 'clip_text_shift_vector.pth')), requires_grad=False)
@@ -332,7 +333,8 @@ class CLIPDensePredT(CLIPDenseBase):
             self.shift_vector = None
 
         if trans_conv is None:
-            trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16)}[version]
+            #trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16)}[version]
+            trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16), 'ViT-L/14': (14, 14)}[version]
         else:
             # explicitly define transposed conv kernel size
             trans_conv_ks = (trans_conv, trans_conv)
@@ -479,7 +481,8 @@ class CLIPDenseBaseline(CLIPDenseBase):
         self.limit_to_clip_only = limit_to_clip_only
         self.shift_vector = None
 
-        self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14)}[version]
+        #self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14)}[version]
+        self.token_shape = {'ViT-B/32': (7, 7), 'ViT-B/16': (14, 14), 'ViT-L/14': (16, 16)}[version]
         
         assert reduce2_dim is not None
 
@@ -489,7 +492,8 @@ class CLIPDenseBaseline(CLIPDenseBase):
             nn.Linear(reduce2_dim, reduce_dim)
         )
         
-        trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16)}[version]
+        #trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16)}[version]
+        trans_conv_ks = {'ViT-B/32': (32, 32), 'ViT-B/16': (16, 16), 'ViT-L/14': (14, 14)}[version]
         self.trans_conv = nn.ConvTranspose2d(reduce_dim, 1, trans_conv_ks, stride=trans_conv_ks)
 
 
